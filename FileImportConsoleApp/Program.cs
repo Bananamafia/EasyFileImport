@@ -8,8 +8,9 @@ namespace FileImportConsoleApp
     {
         static void Main(string[] args)
         {
-            ImportDirectory importDirectory = new ImportDirectory();
-            importDirectory.CreateImportDirectory();
+            //ImportDirectory importDirectory = new ImportDirectory();
+            //importDirectory.CreateImportDirectory();
+            DeviceChecker.CheckDevices();
         }
     }
 }
