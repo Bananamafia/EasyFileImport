@@ -1,6 +1,7 @@
 ﻿using FileImportConsoleApp.Classes;
 using System;
 using System.IO;
+using System.Threading;
 
 namespace FileImportConsoleApp
 {
@@ -10,7 +11,11 @@ namespace FileImportConsoleApp
         {
             //ImportDirectory importDirectory = new ImportDirectory();
             //importDirectory.CreateImportDirectory();
-            DeviceChecker.CheckDevices();
+
+            //DeviceChecker.CheckForNewDevices();
+            //Thread.Sleep(Timeout.Infinite);
+
+            DeviceChecker.PrintOutDeviceContent();
         }
     }
 }
