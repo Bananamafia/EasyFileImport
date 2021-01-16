@@ -15,7 +15,7 @@ namespace FileImportConsoleApp
             //DeviceChecker.CheckForNewDevices();
             //Thread.Sleep(Timeout.Infinite);
 
-            DeviceChecker.PrintOutDeviceContent();
+            //DeviceChecker.PrintOutDeviceContent();
         }
     }
 }

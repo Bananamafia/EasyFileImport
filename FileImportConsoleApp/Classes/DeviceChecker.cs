@@ -11,16 +11,6 @@ namespace FileImportConsoleApp.Classes
     {
         public static void CheckForNewDevices()
         {
-            //ManagementObjectSearcher objectSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_USBHub");
-            //ManagementObjectCollection objects = objectSearcher.Get();
-
-            //Console.WriteLine($"Devices: {objects.Count}");
-
-            //foreach (var item in objects)
-            //{
-            //    Console.WriteLine(item.ToString());
-            //}
-
             ManagementEventWatcher watcher = new ManagementEventWatcher();
             WqlEventQuery query = new WqlEventQuery("SELECT * FROM Win32_VolumeChangeEvent WHERE EventType = 2");
             watcher.EventArrived += new EventArrivedEventHandler(watcher_EventArrived);
@@ -32,9 +22,11 @@ namespace FileImportConsoleApp.Classes
         private static void watcher_EventArrived(object sender, EventArrivedEventArgs e)
         {
             Console.WriteLine("Neues Gerät angeschlossen.");
+            devicePath = e.NewEvent.Properties["DriveName"].Value.ToString();
+            CopyFilesOfDeviceToImportDirectory();
         }
 
-        private static string devicePath = @"D:\";
+        private static string devicePath;
 
         public static void PrintOutDeviceContent()
         {
@@ -51,7 +43,7 @@ namespace FileImportConsoleApp.Classes
             return Directory.GetFiles(devicePath, "*.*", SearchOption.AllDirectories).ToList();
         }
 
-        public static void CopyFilesOfDeviceInImportDirectory()
+        public static void CopyFilesOfDeviceToImportDirectory()
         {
 
         }
