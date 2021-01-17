@@ -11,6 +11,7 @@ namespace FileImportConsoleApp.Classes
     {
         public static void CheckForNewDevices()
         {
+            Console.WriteLine("Angeschlossene Geräte werden beobachtet.");
             ManagementEventWatcher watcher = new ManagementEventWatcher();
             WqlEventQuery query = new WqlEventQuery("SELECT * FROM Win32_VolumeChangeEvent WHERE EventType = 2");
             watcher.EventArrived += new EventArrivedEventHandler(watcher_EventArrived);
@@ -23,7 +24,7 @@ namespace FileImportConsoleApp.Classes
         {
             Console.WriteLine("Neues Gerät angeschlossen.");
             devicePath = e.NewEvent.Properties["DriveName"].Value.ToString();
-            CopyFilesOfDeviceToImportDirectory();
+            StartImportDialog();
         }
 
         private static string devicePath;
@@ -38,14 +39,50 @@ namespace FileImportConsoleApp.Classes
             }
         }
 
-        private List<string> GetFilesOnDevice()
+        private static List<string> GetFilesOnDevice()
         {
             return Directory.GetFiles(devicePath, "*.*", SearchOption.AllDirectories).ToList();
         }
 
         public static void CopyFilesOfDeviceToImportDirectory()
         {
+            if (String.IsNullOrEmpty(devicePath))
+            {
+                Console.WriteLine("Kein gültiges Gerät angeschlossen.");
+            }
+            else
+            {
+                foreach (var file in GetFilesOnDevice())
+                {
+                    File.Copy(file, $@"{ImportDirectory.directory}\{Path.GetFileName(file)}");
+                }
+            }
+        }
 
+        public static void StartImportDialog()
+        {
+            Console.WriteLine($"Wollen Sie die Datein von {devicePath} Importieren? (j/n)");
+
+            switch (Console.ReadKey().KeyChar)
+            {
+                case 'j':
+                    Console.WriteLine();
+                    Console.WriteLine("Import wird gestartet.");
+                    ImportDirectory.CreateImportDirectory();
+                    CopyFilesOfDeviceToImportDirectory();
+                    Console.WriteLine("Import abgeschlossen.");
+                    break;
+                case 'n':
+                    Console.WriteLine();
+                    Console.WriteLine("Import abgebrochen.");
+                    break;
+                default:
+                    Console.WriteLine();
+                    Console.WriteLine("Ungültige Anweisung, bitte versuchen Sie es erneut.");
+                    StartImportDialog();
+                    break;
+
+            }
         }
     }
 }

@@ -12,10 +12,12 @@ namespace FileImportConsoleApp
             //ImportDirectory importDirectory = new ImportDirectory();
             //importDirectory.CreateImportDirectory();
 
-            //DeviceChecker.CheckForNewDevices();
-            //Thread.Sleep(Timeout.Infinite);
+            DeviceChecker.CheckForNewDevices();
+            Thread.Sleep(Timeout.Infinite);
 
             //DeviceChecker.PrintOutDeviceContent();
+
+            //DeviceChecker.StartImportDialog();
         }
     }
 }

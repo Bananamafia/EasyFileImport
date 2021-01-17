@@ -7,17 +7,20 @@ namespace FileImportConsoleApp.Classes
 {
     class ImportDirectory
     {
-        private string directoryPath = $@"{Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}";
-        private string directoryName = $"{DateTime.Today.ToString("yyyy-MM-dd")}_import";
-        private string fullDirectoryPath
+        public static string directory;
+        
+        private static string directoryPath = $@"{Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}";
+        private static string directoryName = $"{DateTime.Today.ToString("yyyy-MM-dd")}_import";
+        private static string fullDirectoryPath
         {
             get { return $@"{directoryPath}\{directoryName}"; }
         }
 
 
-        public void CreateImportDirectory()
+        public static void CreateImportDirectory()
         {
             Directory.CreateDirectory(fullDirectoryPath);
+            directory = fullDirectoryPath;
             Console.WriteLine("Ordner wurde erfolgreich erstellt");
         }
     }
