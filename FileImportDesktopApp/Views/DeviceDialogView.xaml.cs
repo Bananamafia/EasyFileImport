@@ -15,17 +15,14 @@ using FileImportDesktopApp.ViewModels;
 
 namespace FileImportDesktopApp.Views
 {
-    /// <summary>
-    /// Interaktionslogik für MainView.xaml
-    /// </summary>
-    public partial class MainView : Window
+    public partial class DeviceDialogView : Window
     {
-        private MainViewModel _viewModel;
+        private DeviceDialogViewModel _viewModel;
 
-        public MainView()
+        public DeviceDialogView()
         {
             InitializeComponent();
-            _viewModel = new MainViewModel();
+            _viewModel = new DeviceDialogViewModel();
             this.DataContext = _viewModel;
         }
     }

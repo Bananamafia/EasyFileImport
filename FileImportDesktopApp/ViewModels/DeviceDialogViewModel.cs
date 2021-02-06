@@ -7,8 +7,13 @@ using System.Threading.Tasks;
 
 namespace FileImportDesktopApp.ViewModels
 {
-    class MainViewModel : INotifyPropertyChanged
+    class DeviceDialogViewModel : INotifyPropertyChanged
     {
+        public DeviceDialogViewModel()
+        {
+            Models.Services.DeviceCheckerService deviceCheckerService = new Models.Services.DeviceCheckerService();
+        }
+
         private string _deviceName;
         public string DeviceName
         {
