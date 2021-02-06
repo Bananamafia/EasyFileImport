@@ -34,7 +34,8 @@
         <StackPanel Grid.Row="2"
                     Grid.Column="1">
             <Label>Datein von:</Label>
-            <RadioButton IsChecked="True">Heute</RadioButton>
+            <RadioButton IsChecked="True">Immer</RadioButton>
+            <RadioButton>Heute</RadioButton>
             <RadioButton>vor 3 Tagen</RadioButton>
             <RadioButton>vor 1 Woche</RadioButton>
             <RadioButton>Benutzerdefiniert</RadioButton>
