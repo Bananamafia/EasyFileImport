@@ -24,6 +24,29 @@ namespace FileImportDesktopApp.ViewModels
 
         public int SelectedFilesCount { get; set; }
 
+        public enum TimePeriod
+        {
+            allTime,
+            today,
+            pastThreeDays,
+            pastWeek,
+            custom
+        }
+
+        private TimePeriod _selectedTimePeriod;
+
+        public TimePeriod SelectedTimePeriod
+        {
+            get { return _selectedTimePeriod; }
+            set
+            {
+                _selectedTimePeriod = value;
+                OnPropertyChanged("SelectedTimePeriod");
+                OnPropertyChanged("SelectedFilesCount");
+            }
+        }
+
+
         //---INotifyPropertyChanged---
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string property)
