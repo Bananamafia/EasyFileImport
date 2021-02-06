@@ -57,7 +57,7 @@
         <StackPanel Grid.Row="4"
                     Grid.Column="1"
                     Orientation="Horizontal">
-            <Button>Importieren</Button>
+            <Button Command="{Binding ImportFilesCommand}">Importieren</Button>
             <Button>Abbrechen</Button>
         </StackPanel>
 

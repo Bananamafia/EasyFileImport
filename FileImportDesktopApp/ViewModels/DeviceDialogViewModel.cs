@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FileImportDesktopApp.ViewModels.Commands;
 
 namespace FileImportDesktopApp.ViewModels
 {
@@ -49,6 +50,19 @@ namespace FileImportDesktopApp.ViewModels
                 OnPropertyChanged("SelectedTimePeriod");
                 OnPropertyChanged("SelectedFilesCount");
             }
+        }
+
+
+        //---Commands---
+        private ImportFilesCommand importFilesCommand;
+        public ImportFilesCommand ImportFilesCommand
+        {
+            get
+            {
+                importFilesCommand = new ImportFilesCommand();
+                return importFilesCommand;
+            }
+            set { importFilesCommand = value; }
         }
 
 

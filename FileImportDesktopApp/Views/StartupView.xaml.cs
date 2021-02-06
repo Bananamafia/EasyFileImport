@@ -29,6 +29,9 @@ namespace FileImportDesktopApp.Views
             _viewModel = new StartupViewModel();
             this.DataContext = _viewModel;
 
+            DeviceDialogView deviceDialogView = new DeviceDialogView("Test:");
+            deviceDialogView.Show();
+
             Thread thread = new Thread(HideStartupWindow);
             thread.Start();
         }
