@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,6 +28,15 @@ namespace FileImportDesktopApp.Views
             InitializeComponent();
             _viewModel = new StartupViewModel();
             this.DataContext = _viewModel;
+
+            Thread thread = new Thread(HideStartupWindow);
+            thread.Start();
+        }
+
+        private void HideStartupWindow()
+        {
+            Thread.Sleep(2500);
+            Dispatcher.Invoke(this.Hide);
         }
     }
 }

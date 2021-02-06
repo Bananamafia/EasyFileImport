@@ -19,8 +19,7 @@ namespace FileImportDesktopApp.Models.Services
             watcher.Start();
         }
 
-        public string DevicePath { get; set; } = "Hallo, ich bin nur ein Beispiel";
-
+        public string DevicePath { get; set; }
 
         public void watcher_EventArrived(object sender, EventArrivedEventArgs e)
         {
