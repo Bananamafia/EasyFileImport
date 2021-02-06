@@ -6,8 +6,59 @@
         xmlns:local="clr-namespace:FileImportDesktopApp.Views"
         xmlns:vm="clr-namespace:FileImportDesktopApp.ViewModels"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        Title="Easy File Import"
+        Height="250"
+        Width="350">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10px" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="10px" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10px" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="10" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="1"
+                   Grid.Column="1">
+            Gerät 
+            <TextBlock Text="{Binding DeviceName}" />
+            wurde angeschlossen.
+        </TextBlock>
+
+        <StackPanel Grid.Row="2"
+                    Grid.Column="1">
+            <Label>Datein von:</Label>
+            <RadioButton IsChecked="True">Heute</RadioButton>
+            <RadioButton>vor 3 Tagen</RadioButton>
+            <RadioButton>vor 1 Woche</RadioButton>
+            <RadioButton>Benutzerdefiniert</RadioButton>
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="10px">
+                <DatePicker></DatePicker>
+                <TextBlock Text=" - " />
+                <DatePicker></DatePicker>
+            </StackPanel>
+        </StackPanel>
+
+        <TextBlock Grid.Row="3"
+                   Grid.Column="1">
+            <TextBlock Text="{Binding SelectedFilesCount}" />
+            Datein wurden ausgewählt.
+        </TextBlock>
+
+        <StackPanel Grid.Row="4"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+            <Button>Importieren</Button>
+            <Button>Abbrechen</Button>
+        </StackPanel>
+
     </Grid>
 </Window>
