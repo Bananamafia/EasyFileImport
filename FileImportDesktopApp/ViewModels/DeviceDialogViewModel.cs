@@ -9,9 +9,9 @@ namespace FileImportDesktopApp.ViewModels
 {
     class DeviceDialogViewModel : INotifyPropertyChanged
     {
-        public DeviceDialogViewModel()
+        public DeviceDialogViewModel(string deviceName)
         {
-            Models.Services.DeviceCheckerService deviceCheckerService = new Models.Services.DeviceCheckerService();
+            DeviceName = deviceName;
         }
 
         private string _deviceName;

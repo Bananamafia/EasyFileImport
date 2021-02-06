@@ -19,10 +19,10 @@ namespace FileImportDesktopApp.Views
     {
         private DeviceDialogViewModel _viewModel;
 
-        public DeviceDialogView()
+        public DeviceDialogView(string deviceName)
         {
             InitializeComponent();
-            _viewModel = new DeviceDialogViewModel();
+            _viewModel = new DeviceDialogViewModel(deviceName);
             this.DataContext = _viewModel;
         }
     }
