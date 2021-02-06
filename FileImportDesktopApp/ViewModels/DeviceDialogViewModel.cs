@@ -15,33 +15,13 @@ namespace FileImportDesktopApp.ViewModels
             DeviceName = deviceName;
         }
 
-        private string _deviceName;
-        public string DeviceName
-        {
-            get
-            { return _deviceName; }
-            set
-            {
-                _deviceName = value;
-                OnPropertyChanged("DeviceName");
-                OnPropertyChanged("SelectedFilesCount");
-            }
-        }
+        public string DeviceName { get; private set; }
 
-        public int SelectedFilesCount { get; set; }
+        public int SelectedFilesCount { get; } //Todo: return FileList.Length
 
-        public enum TimePeriod
-        {
-            allTime,
-            today,
-            pastThreeDays,
-            pastWeek,
-            custom
-        }
 
-        private TimePeriod _selectedTimePeriod;
-
-        public TimePeriod SelectedTimePeriod
+        private Models.TimePeriodPicker.TimePeriod _selectedTimePeriod;
+        public Models.TimePeriodPicker.TimePeriod SelectedTimePeriod
         {
             get { return _selectedTimePeriod; }
             set
@@ -53,7 +33,7 @@ namespace FileImportDesktopApp.ViewModels
         }
 
 
-        //---Commands---
+        #region ---Commands---
         private ImportFilesCommand importFilesCommand;
         public ImportFilesCommand ImportFilesCommand
         {
@@ -64,9 +44,9 @@ namespace FileImportDesktopApp.ViewModels
             }
             set { importFilesCommand = value; }
         }
+        #endregion
 
-
-        //---INotifyPropertyChanged---
+        #region---INotifyPropertyChanged---
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string property)
         {
@@ -75,5 +55,6 @@ namespace FileImportDesktopApp.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
             }
         }
+        #endregion
     }
 }
