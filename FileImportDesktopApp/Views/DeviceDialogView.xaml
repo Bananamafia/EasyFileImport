@@ -27,7 +27,7 @@
         <TextBlock Grid.Row="1"
                    Grid.Column="1">
             Gerät 
-            <TextBlock Text="{Binding DeviceName}" />
+            <TextBlock Text="{Binding DevicePath}" />
             wurde angeschlossen.
         </TextBlock>
 

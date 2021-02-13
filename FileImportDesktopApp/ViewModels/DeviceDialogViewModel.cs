@@ -4,24 +4,37 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FileImportDesktopApp.Models;
 using FileImportDesktopApp.ViewModels.Commands;
 
 namespace FileImportDesktopApp.ViewModels
 {
     class DeviceDialogViewModel : INotifyPropertyChanged
     {
-        public DeviceDialogViewModel(string deviceName)
+        public DeviceDialogViewModel(string devicePath)
         {
-            DeviceName = deviceName;
+            DevicePath = devicePath;
         }
 
-        public string DeviceName { get; private set; }
+        private string _devicePath;
+        public string DevicePath
+        {
+            get
+            { return _devicePath; }
+            set
+            {
+                _devicePath = value;
+                OnPropertyChanged("DevicePath");
+                OnPropertyChanged("SelectedFilesCount");
+            }
+        }
 
-        public int SelectedFilesCount { get; } //Todo: return FileList.Length
+        public int SelectedFilesCount { get; set; }
 
 
-        private Models.TimePeriodPicker.TimePeriod _selectedTimePeriod;
-        public Models.TimePeriodPicker.TimePeriod SelectedTimePeriod
+        private TimePeriod _selectedTimePeriod;
+
+        public TimePeriod SelectedTimePeriod
         {
             get { return _selectedTimePeriod; }
             set
@@ -33,7 +46,7 @@ namespace FileImportDesktopApp.ViewModels
         }
 
 
-        #region ---Commands---
+        //---Commands---
         private ImportFilesCommand importFilesCommand;
         public ImportFilesCommand ImportFilesCommand
         {
@@ -44,9 +57,9 @@ namespace FileImportDesktopApp.ViewModels
             }
             set { importFilesCommand = value; }
         }
-        #endregion
 
-        #region---INotifyPropertyChanged---
+
+        //---INotifyPropertyChanged---
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string property)
         {
@@ -55,6 +68,5 @@ namespace FileImportDesktopApp.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
             }
         }
-        #endregion
     }
 }
