@@ -30,7 +30,7 @@ namespace FileImportDesktopApp.ViewModels
         }
 
 
-        public TimePeriod SelectedTimePeriod
+        public TimePeriod SelectedTimePeriod 
         {
             get { return _configSettings.TimePeriod; }
             set

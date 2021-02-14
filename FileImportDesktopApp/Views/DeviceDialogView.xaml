@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileImportDesktopApp.Views"
         xmlns:vm="clr-namespace:FileImportDesktopApp.ViewModels"
+        xmlns:convert="clr-namespace:FileImportDesktopApp.ViewModels.Converters"
+        xmlns:models="clr-namespace:FileImportDesktopApp.Models"
         mc:Ignorable="d"
         Title="Easy File Import"
         Height="250"
@@ -33,12 +35,31 @@
 
         <StackPanel Grid.Row="2"
                     Grid.Column="1">
+            <StackPanel.Resources>
+                <convert:EnumBooleanConverter x:Key="EnumBooleanConverter" />
+            </StackPanel.Resources>
             <Label>Datein von:</Label>
-            <RadioButton IsChecked="True">Immer</RadioButton>
-            <RadioButton>Heute</RadioButton>
-            <RadioButton>vor 3 Tagen</RadioButton>
-            <RadioButton>vor 1 Woche</RadioButton>
-            <RadioButton>Benutzerdefiniert</RadioButton>
+
+            <RadioButton Content="Immer"
+                         IsChecked="{Binding Path=SelectedTimePeriod, 
+                                    Converter={StaticResource EnumBooleanConverter}, 
+                                    ConverterParameter={x:Static models:TimePeriod.allTime}}" />
+            <RadioButton Content="Heute"
+                         IsChecked="{Binding Path=SelectedTimePeriod, 
+                                    Converter={StaticResource EnumBooleanConverter}, 
+                                    ConverterParameter={x:Static models:TimePeriod.today}}" />
+            <RadioButton Content="vor 3 Tagen"
+                         IsChecked="{Binding Path=SelectedTimePeriod, 
+                                    Converter={StaticResource EnumBooleanConverter}, 
+                                    ConverterParameter={x:Static models:TimePeriod.pastThreeDays}}" />
+            <RadioButton Content="vor 1 Woche"
+                         IsChecked="{Binding Path=SelectedTimePeriod, 
+                                    Converter={StaticResource EnumBooleanConverter}, 
+                                    ConverterParameter={x:Static models:TimePeriod.pastWeek}}" />
+            <RadioButton Content="Benutzerdefiniert"
+                         IsChecked="{Binding Path=SelectedTimePeriod, 
+                                    Converter={StaticResource EnumBooleanConverter}, 
+                                    ConverterParameter={x:Static models:TimePeriod.custom}}" />
 
             <StackPanel Orientation="Horizontal"
                         Margin="10px">

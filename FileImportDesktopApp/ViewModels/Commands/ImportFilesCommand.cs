@@ -23,13 +23,11 @@ namespace FileImportDesktopApp.ViewModels.Commands
         public bool CanExecute(object parameter)
         {
             return true;
-            //throw new NotImplementedException();
         }
 
         public void Execute(object parameter)
         {
-            MessageBox.Show(ConfigSettings.BeginningDate.ToString());
-            //throw new NotImplementedException();
+            MessageBox.Show(ConfigSettings.TimePeriod.ToString());
         }
     }
 }

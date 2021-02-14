@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\Converters\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.Management" Version="5.0.0" />
   </ItemGroup>
 
