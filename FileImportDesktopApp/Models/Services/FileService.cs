@@ -7,28 +7,24 @@ using System.Threading.Tasks;
 
 namespace FileImportDesktopApp.Models.Services
 {
-    public class FileService
+    public static class FileService
     {
-        public FileService(ImportConfigSettings configSettings)
+        public static List<string> GetSelectedFilePaths(ImportConfigSettings configSettings)
         {
-            _configSettings = configSettings;
-        }
+            List<string> unfilteredFiles = Directory.GetFiles(configSettings.DevicePath, "*.*", configSettings.DirectoryDepth).ToList();
 
-        private ImportConfigSettings _configSettings;
+            List<string> filteredFiles = new List<string>();
 
-        public List<string> SelectedFilePaths()
-        {
-            List<string> files = Directory.GetFiles(_configSettings.DevicePath, "*.*", _configSettings.DirectoryDepth).ToList();
-
-            return files;
-        }
-
-        public int NumberOfFiles
-        {
-            get
+            foreach (var file in unfilteredFiles)
             {
-                return SelectedFilePaths().Count();
+                if (File.GetCreationTime(file) >= configSettings.BeginningDate
+                    && File.GetCreationTime(file) <= configSettings.EndingDate.AddDays(1))
+                {
+                    filteredFiles.Add(file);
+                }
             }
+
+            return filteredFiles;
         }
     }
 }
