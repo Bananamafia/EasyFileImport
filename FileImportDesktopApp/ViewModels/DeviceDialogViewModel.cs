@@ -26,11 +26,11 @@ namespace FileImportDesktopApp.ViewModels
 
         public int SelectedFilesCount
         {
-            get { return Directory.GetFiles(_configSettings.DevicePath).Length; }
+            get { return Models.Services.FileService.GetSelectedFilePaths(_configSettings).Count(); }
         }
 
 
-        public TimePeriod SelectedTimePeriod 
+        public TimePeriod SelectedTimePeriod
         {
             get { return _configSettings.TimePeriod; }
             set
@@ -38,6 +38,8 @@ namespace FileImportDesktopApp.ViewModels
                 _configSettings.TimePeriod = value;
                 OnPropertyChanged("SelectedTimePeriod");
                 OnPropertyChanged("SelectedFilesCount");
+                OnPropertyChanged("BeginningDate");
+                OnPropertyChanged("EndingDate");
             }
         }
 
@@ -49,6 +51,7 @@ namespace FileImportDesktopApp.ViewModels
                 _configSettings.BeginningDate = value;
                 OnPropertyChanged("BeginningDate");
                 OnPropertyChanged("SelectedFilesCount");
+                OnPropertyChanged("SelectedTimePeriod");
             }
         }
 
@@ -60,6 +63,7 @@ namespace FileImportDesktopApp.ViewModels
                 _configSettings.EndingDate = value;
                 OnPropertyChanged("EndingDate");
                 OnPropertyChanged("SelectedFilesCount");
+                OnPropertyChanged("SelectedTimePeriod");
             }
         }
 

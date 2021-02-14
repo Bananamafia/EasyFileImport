@@ -22,8 +22,60 @@ namespace FileImportDesktopApp.Models
 
         public TimePeriod TimePeriod { get; set; } = TimePeriod.allTime;
 
-        public DateTime BeginningDate { get; set; } = DateTime.Today;
-        public DateTime EndingDate { get; set; } = DateTime.Today;
+        private DateTime _beginningDate;
+        public DateTime BeginningDate
+        {
+            get
+            {
+                switch (TimePeriod)
+                {
+                    case TimePeriod.allTime:
+                        _beginningDate = DateTime.MinValue;
+                        break;
+                    case TimePeriod.today:
+                        _beginningDate = DateTime.Today;
+                        break;
+                    case TimePeriod.pastThreeDays:
+                        _beginningDate = DateTime.Today.AddDays(-3);
+                        break;
+                    case TimePeriod.pastWeek:
+                        _beginningDate = DateTime.Today.AddDays(-7);
+                        break;
+                    case TimePeriod.custom:
+                        break;
+                }
+
+                return _beginningDate;
+            }
+            set
+            {
+                _beginningDate = value;
+                TimePeriod = TimePeriod.custom;
+            }
+        }
+
+        private DateTime _endingDate;
+        public DateTime EndingDate
+        {
+            get
+            {
+                switch (TimePeriod)
+                {
+                    case TimePeriod.custom:
+                        break;
+                    default:
+                        _endingDate = DateTime.Today;
+                        break;
+                }
+                return _endingDate;
+            }
+            set
+            {
+                _endingDate = value;
+                TimePeriod = TimePeriod.custom;
+            }
+        }
+
         public SearchOption DirectoryDepth { get; set; } = SearchOption.AllDirectories;
     }
 }
