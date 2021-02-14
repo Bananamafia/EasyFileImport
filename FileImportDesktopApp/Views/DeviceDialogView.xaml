@@ -42,9 +42,9 @@
 
             <StackPanel Orientation="Horizontal"
                         Margin="10px">
-                <DatePicker></DatePicker>
+                <DatePicker SelectedDate="{Binding BeginningDate}"></DatePicker>
                 <TextBlock Text=" - " />
-                <DatePicker></DatePicker>
+                <DatePicker SelectedDate="{Binding EndingDate}"></DatePicker>
             </StackPanel>
         </StackPanel>
 

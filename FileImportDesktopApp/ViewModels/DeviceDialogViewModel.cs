@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,38 +14,54 @@ namespace FileImportDesktopApp.ViewModels
     {
         public DeviceDialogViewModel(string devicePath)
         {
-            DevicePath = devicePath;
+            _configSettings = new ImportConfigSettings(devicePath);
         }
 
-        private string _devicePath;
+        private ImportConfigSettings _configSettings;
+
         public string DevicePath
         {
-            get
-            { return _devicePath; }
-            set
-            {
-                _devicePath = value;
-                OnPropertyChanged("DevicePath");
-                OnPropertyChanged("SelectedFilesCount");
-            }
+            get { return _configSettings.DevicePath; }
         }
 
-        public int SelectedFilesCount { get; set; }
+        public int SelectedFilesCount
+        {
+            get { return Directory.GetFiles(_configSettings.DevicePath).Length; }
+        }
 
-
-        private TimePeriod _selectedTimePeriod;
 
         public TimePeriod SelectedTimePeriod
         {
-            get { return _selectedTimePeriod; }
+            get { return _configSettings.TimePeriod; }
             set
             {
-                _selectedTimePeriod = value;
+                _configSettings.TimePeriod = value;
                 OnPropertyChanged("SelectedTimePeriod");
                 OnPropertyChanged("SelectedFilesCount");
             }
         }
 
+        public DateTime BeginningDate
+        {
+            get { return _configSettings.BeginningDate; }
+            set
+            {
+                _configSettings.BeginningDate = value;
+                OnPropertyChanged("BeginningDate");
+                OnPropertyChanged("SelectedFilesCount");
+            }
+        }
+
+        public DateTime EndingDate
+        {
+            get { return _configSettings.EndingDate; }
+            set
+            {
+                _configSettings.EndingDate = value;
+                OnPropertyChanged("EndingDate");
+                OnPropertyChanged("SelectedFilesCount");
+            }
+        }
 
         //---Commands---
         private ImportFilesCommand importFilesCommand;
@@ -52,7 +69,7 @@ namespace FileImportDesktopApp.ViewModels
         {
             get
             {
-                importFilesCommand = new ImportFilesCommand();
+                importFilesCommand = new ImportFilesCommand(_configSettings);
                 return importFilesCommand;
             }
             set { importFilesCommand = value; }

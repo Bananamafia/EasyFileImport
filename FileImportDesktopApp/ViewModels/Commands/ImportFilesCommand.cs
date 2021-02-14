@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FileImportDesktopApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,13 @@ namespace FileImportDesktopApp.ViewModels.Commands
 {
     class ImportFilesCommand : ICommand
     {
+        public ImportFilesCommand(ImportConfigSettings configSettings)
+        {
+            ConfigSettings = configSettings;
+        }
+
+        private ImportConfigSettings ConfigSettings { get; set; }
+
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
@@ -20,7 +28,7 @@ namespace FileImportDesktopApp.ViewModels.Commands
 
         public void Execute(object parameter)
         {
-            MessageBox.Show("Klappt");
+            MessageBox.Show(ConfigSettings.BeginningDate.ToString());
             //throw new NotImplementedException();
         }
     }

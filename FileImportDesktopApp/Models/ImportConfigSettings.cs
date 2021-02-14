@@ -15,13 +15,12 @@ namespace FileImportDesktopApp.Models
         }
 
         private string _devicePath;
-
         public string DevicePath
         {
             get { return _devicePath; }
         }
 
-        public TimePeriod timePeriod { get; set; } = TimePeriod.allTime;
+        public TimePeriod TimePeriod { get; set; } = TimePeriod.allTime;
 
         public DateTime BeginningDate { get; set; } = DateTime.Today;
         public DateTime EndingDate { get; set; } = DateTime.Today;
