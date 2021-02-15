@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -32,14 +33,29 @@ namespace FileImportDesktopApp.Views
             DeviceDialogView deviceDialogView = new DeviceDialogView(@"C:\Users\maxim\Desktop\Auswahl");
             deviceDialogView.Show();
 
-            Thread thread = new Thread(HideStartupWindow);
+            Thread thread = new Thread(LoadApp);
             thread.Start();
+        }
+
+        private void LoadApp()
+        {
+            Thread.Sleep(2500);
+            Dispatcher.Invoke(HideStartupWindow);
         }
 
         private void HideStartupWindow()
         {
-            Thread.Sleep(2500);
-            Dispatcher.Invoke(this.Hide);
+            this.Hide();
+
+            System.Windows.Forms.NotifyIcon notificationIcon = new System.Windows.Forms.NotifyIcon();
+            notificationIcon.Icon = new System.Drawing.Icon("../../../Resources/Icons/appIcon.ico");
+            notificationIcon.Visible = true;
+
+            notificationIcon.DoubleClick +=
+                delegate (object sender, EventArgs args)
+                {
+                    System.Windows.MessageBox.Show("Zeige die angeschlossenen Geräte an");
+                };
         }
     }
 }
