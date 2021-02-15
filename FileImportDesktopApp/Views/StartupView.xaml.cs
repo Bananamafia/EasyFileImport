@@ -47,15 +47,7 @@ namespace FileImportDesktopApp.Views
         {
             this.Hide();
 
-            System.Windows.Forms.NotifyIcon notificationIcon = new System.Windows.Forms.NotifyIcon();
-            notificationIcon.Icon = new System.Drawing.Icon("../../../Resources/Icons/appIcon.ico");
-            notificationIcon.Visible = true;
-
-            notificationIcon.DoubleClick +=
-                delegate (object sender, EventArgs args)
-                {
-                    System.Windows.MessageBox.Show("Zeige die angeschlossenen Geräte an");
-                };
+            Models.Services.SystemTrayService.SetUpSystemTray();
         }
     }
 }
