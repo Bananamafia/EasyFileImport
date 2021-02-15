@@ -1,4 +1,5 @@
 ﻿using FileImportDesktopApp.Models;
+using FileImportDesktopApp.Models.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace FileImportDesktopApp.ViewModels.Commands
 
         public void Execute(object parameter)
         {
-            MessageBox.Show(ConfigSettings.TimePeriod.ToString());
+            FileService.CopyFilesToImportDirectory(ConfigSettings);
         }
     }
 }
