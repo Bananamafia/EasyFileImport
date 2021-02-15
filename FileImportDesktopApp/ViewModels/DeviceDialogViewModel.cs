@@ -29,6 +29,10 @@ namespace FileImportDesktopApp.ViewModels
             get { return Models.Services.FileService.GetSelectedFilePaths(_configSettings).Count(); }
         }
 
+        public decimal SelectedFilesSizeInMb
+        {
+            get { return Models.Services.FileService.GetSizeInMbOfSelectedFiles(_configSettings); }
+        }
 
         public TimePeriod SelectedTimePeriod
         {
@@ -40,6 +44,7 @@ namespace FileImportDesktopApp.ViewModels
                 OnPropertyChanged("SelectedFilesCount");
                 OnPropertyChanged("BeginningDate");
                 OnPropertyChanged("EndingDate");
+                OnPropertyChanged("SelectedFilesSizeInMb");
             }
         }
 
@@ -52,6 +57,7 @@ namespace FileImportDesktopApp.ViewModels
                 OnPropertyChanged("BeginningDate");
                 OnPropertyChanged("SelectedFilesCount");
                 OnPropertyChanged("SelectedTimePeriod");
+                OnPropertyChanged("SelectedFilesSizeInMb");
             }
         }
 
@@ -64,6 +70,7 @@ namespace FileImportDesktopApp.ViewModels
                 OnPropertyChanged("EndingDate");
                 OnPropertyChanged("SelectedFilesCount");
                 OnPropertyChanged("SelectedTimePeriod");
+                OnPropertyChanged("SelectedFilesSizeInMb");
             }
         }
 

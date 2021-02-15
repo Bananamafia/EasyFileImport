@@ -28,6 +28,20 @@ namespace FileImportDesktopApp.Models.Services
             return filteredFiles;
         }
 
+        public static long GetSizeInMbOfSelectedFiles(ImportConfigSettings configSettings)
+        {
+            long sizeInByte = 0;
+
+            foreach (var file in GetSelectedFilePaths(configSettings))
+            {
+                FileInfo fileInfo = new FileInfo(file);
+                sizeInByte += fileInfo.Length;
+            }
+
+            long sizeInMegaByte = sizeInByte / 1000000;
+            return sizeInMegaByte;
+        }
+
         public static void CopyFilesToImportDirectory(ImportConfigSettings configSettings)
         {
             if (GetSelectedFilePaths(configSettings).Any())
@@ -39,7 +53,7 @@ namespace FileImportDesktopApp.Models.Services
                 }
                 MessageBox.Show("Import erfolgreich abgeschlossen.");
             }
-            else if(configSettings.EndingDate < configSettings.BeginningDate)
+            else if (configSettings.EndingDate < configSettings.BeginningDate)
             {
                 MessageBox.Show("Das Enddatum darf nicht vor dem Anfangsdatum liegen.");
             }
