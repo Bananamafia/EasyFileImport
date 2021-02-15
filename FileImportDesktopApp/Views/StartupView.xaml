@@ -20,6 +20,11 @@
                    Foreground="#CCCCCC"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center">Easy File Import</TextBlock>
+        <TextBlock FontSize="10"
+                   Foreground="#888888"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"
+                   Padding="21, 7">by Maximilian Kiefer</TextBlock>
     </Grid>
 
 </Window>

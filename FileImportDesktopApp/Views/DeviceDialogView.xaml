@@ -9,8 +9,17 @@
         xmlns:models="clr-namespace:FileImportDesktopApp.Models"
         mc:Ignorable="d"
         Title="Easy File Import"
-        Height="250"
+        Height="275"
         Width="350">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin"
+                    Value="20, 10, 20, 5" />
+            <Setter Property="Padding"
+                    Value="6" />
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10px" />
@@ -29,7 +38,8 @@
         <TextBlock Grid.Row="1"
                    Grid.Column="1">
             Gerät 
-            <TextBlock Text="{Binding DevicePath}" />
+            <TextBlock Text="{Binding DevicePath}"
+                       FontWeight="Bold" />
             wurde angeschlossen.
         </TextBlock>
 
@@ -38,7 +48,7 @@
             <StackPanel.Resources>
                 <convert:EnumBooleanConverter x:Key="EnumBooleanConverter" />
             </StackPanel.Resources>
-            <Label>Datein von:</Label>
+            <Label>Datein aus folgendem Zeitraum importieren:</Label>
 
             <RadioButton Content="Immer"
                          IsChecked="{Binding Path=SelectedTimePeriod, 
@@ -71,14 +81,16 @@
 
         <TextBlock Grid.Row="3"
                    Grid.Column="1">
-            <TextBlock Text="{Binding SelectedFilesCount}" />
+            <TextBlock Text="{Binding SelectedFilesCount}"
+                       FontWeight="Bold" />
             Datein wurden ausgewählt. 
             (~ <TextBlock Text="{Binding SelectedFilesSizeInMb}" />MB)
         </TextBlock>
 
         <StackPanel Grid.Row="4"
                     Grid.Column="1"
-                    Orientation="Horizontal">
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
             <Button Command="{Binding ImportFilesCommand}">Importieren</Button>
             <Button>Abbrechen</Button>
         </StackPanel>
