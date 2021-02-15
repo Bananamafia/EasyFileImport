@@ -25,5 +25,10 @@ namespace FileImportDesktopApp.Views
             _viewModel = new DeviceDialogViewModel(deviceName);
             this.DataContext = _viewModel;
         }
+
+        private void CancleButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

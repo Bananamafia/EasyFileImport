@@ -92,7 +92,7 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Center">
             <Button Command="{Binding ImportFilesCommand}">Importieren</Button>
-            <Button>Abbrechen</Button>
+            <Button Click="CancleButton_Click">Abbrechen</Button>
         </StackPanel>
 
     </Grid>
