@@ -31,5 +31,23 @@ namespace FileImportDesktopApp.Models.Services
             });
         }
 
+        public static List<string> GetConnectedDevices()
+        {
+            List<string> devices = new List<string>();
+
+            ManagementObjectCollection collection;
+            using (var searcher = new ManagementObjectSearcher(@"SELECT * FROM Win32_LogicalDisk "))
+            {
+                collection = searcher.Get();
+            }
+
+            foreach (var item in collection)
+            {
+                devices.Add(item.GetPropertyValue("DeviceId").ToString());
+            }
+
+            return devices;
+        }
+
     }
 }
