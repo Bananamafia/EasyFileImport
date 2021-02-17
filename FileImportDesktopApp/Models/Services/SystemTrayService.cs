@@ -23,9 +23,11 @@ namespace FileImportDesktopApp.Models.Services
                     delegate (object sender, EventArgs args)
                     {
                         ContextMenu contextMenu = new ContextMenu();
-                        contextMenu.Items.Add(new MenuItem() { Header = "Balloon" });
-                        contextMenu.Items.Add(new MenuItem() { Header = "Rectangle" });
-                        contextMenu.Items.Add(new MenuItem() { Header = "RoundedRectangle" });
+
+                        foreach (var device in DeviceCheckerService.GetConnectedDevices())
+                        {
+                            contextMenu.Items.Add(new MenuItem() { Header = device });
+                        }
                         contextMenu.Items.Cast<MenuItem>().ToList();//.ForEach(x => x.Click += X_Click);
                         contextMenu.IsOpen = true;
                     };

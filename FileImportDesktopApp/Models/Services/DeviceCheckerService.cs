@@ -36,7 +36,7 @@ namespace FileImportDesktopApp.Models.Services
             List<string> devices = new List<string>();
 
             ManagementObjectCollection collection;
-            using (var searcher = new ManagementObjectSearcher(@"SELECT * FROM Win32_LogicalDisk "))
+            using (var searcher = new ManagementObjectSearcher(@"SELECT * FROM Win32_LogicalDisk WHERE FileSystem = 'FAT32'"))
             {
                 collection = searcher.Get();
             }
