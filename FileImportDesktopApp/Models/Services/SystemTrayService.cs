@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,9 @@ namespace FileImportDesktopApp.Models.Services
         public static void SetUpSystemTray()
         {
             System.Windows.Forms.NotifyIcon notificationIcon = new System.Windows.Forms.NotifyIcon();
-            notificationIcon.Icon = new System.Drawing.Icon("../../../Resources/Icons/appIcon.ico");
+            Stream iconStream = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/Resources/Icons/appIcon.ico")).Stream;
+            notificationIcon.Icon = new System.Drawing.Icon(iconStream);
+
             notificationIcon.Visible = true;
             notificationIcon.Text = "Gerät für Easy File Import auswählen.";
 
