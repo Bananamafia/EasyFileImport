@@ -30,9 +30,6 @@ namespace FileImportDesktopApp.Views
             _viewModel = new StartupViewModel();
             this.DataContext = _viewModel;
 
-            DeviceDialogView deviceDialogView = new DeviceDialogView(@"C:\Users\maxim\Desktop\Auswahl");
-            deviceDialogView.Show();
-
             Thread thread = new Thread(LoadApp);
             thread.Start();
         }
