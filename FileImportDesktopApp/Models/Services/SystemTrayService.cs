@@ -10,27 +10,42 @@ namespace FileImportDesktopApp.Models.Services
 {
     class SystemTrayService
     {
+        private static System.Windows.Forms.NotifyIcon notificationIcon;
+
         public static void SetUpSystemTray()
         {
-            System.Windows.Forms.NotifyIcon notificationIcon = new System.Windows.Forms.NotifyIcon();
             Stream iconStream = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/Resources/Icons/appIcon.ico")).Stream;
-            notificationIcon.Icon = new System.Drawing.Icon(iconStream);
 
-            notificationIcon.Visible = true;
-            notificationIcon.Text = "Gerät für Easy File Import auswählen.";
+            notificationIcon = new System.Windows.Forms.NotifyIcon()
+            {
+                Text = "Rechtsklick, um Gerät für Easy File Import auszuwählen.",
+                Visible = true,
+                Icon = new System.Drawing.Icon(iconStream)
+            };
 
-            notificationIcon.Click +=
-                    delegate (object sender, EventArgs args)
-                    {
-                        ContextMenu contextMenu = new ContextMenu();
+            System.Windows.Forms.ContextMenuStrip contextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
 
-                        foreach (var device in DeviceCheckerService.GetConnectedDevices())
-                        {
-                            contextMenu.Items.Add(new MenuItem() { Header = device });
-                        }
-                        contextMenu.Items.Cast<MenuItem>().ToList();//.ForEach(x => x.Click += X_Click);
-                        contextMenu.IsOpen = true;
-                    };
+            foreach (var device in DeviceCheckerService.GetConnectedDevices())
+            {
+                contextMenuStrip.Items.Add(device, null, ContextMenuClicked_Event);
+            }
+
+            contextMenuStrip.Items.Add("-");
+            contextMenuStrip.Items.Add("Beenden", null, CloseAppClicked_Event);
+
+            notificationIcon.ContextMenuStrip = contextMenuStrip;
+        }
+
+        private static void CloseAppClicked_Event(object sender, EventArgs e)
+        {
+            notificationIcon.Visible = false;
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        private static void ContextMenuClicked_Event(object sender, EventArgs e)
+        {
+            Views.DeviceDialogView view = new Views.DeviceDialogView(sender.ToString());
+            view.Show();
         }
     }
 }
