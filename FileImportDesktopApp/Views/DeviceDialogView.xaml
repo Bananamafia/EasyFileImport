@@ -10,7 +10,9 @@
         mc:Ignorable="d"
         Title="Easy File Import"
         Height="275"
-        Width="350">
+        Width="350"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin"
